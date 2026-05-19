@@ -1,47 +1,289 @@
 @import "tailwindcss";
 
+/* ── UI-UX Pro Max Design System: LYQX Agency ───────────
+   Style:      Motion-Driven + Dark Premium
+   Fonts:      Archivo (display) / Space Grotesk (body)
+   Palette:    Deep dark · Lime accent · White text
+────────────────────────────────────────────────────── */
+
+/* ── Google Fonts (self-hosted via next/font — no external request) ── */
+/* Archivo + Space Grotesk imported via layout.tsx                      */
+
+/* ── Design Tokens ─────────────────────────────────────── */
 :root {
-  --lime: #c9f31d;
-  --dark: #0f131a;
-  --card: #0a0a0a;
-  --surface: #1f1d1d;
-  --muted: #3d3d3d;
-  --orange: #f58327;
+  --lime:      #c9f31d;
+  --lime-05:   rgba(201, 243, 29, 0.05);
+  --lime-10:   rgba(201, 243, 29, 0.10);
+  --lime-20:   rgba(201, 243, 29, 0.20);
+  --lime-glow: 0 0 48px rgba(201, 243, 29, 0.15), 0 0 1px rgba(201, 243, 29, 0.35);
+
+  --dark:      #080A10;
+  --dark-2:    #0B0D16;
+  --card:      #0E1118;
+  --card-2:    #12161F;
+  --surface:   #1A1F2E;
+  --muted:     #3A4050;
+  --border:    rgba(255, 255, 255, 0.07);
+
+  --glow-card: 0 24px 64px -12px rgba(0, 0, 0, 0.7);
 }
 
-html {
-  scroll-behavior: smooth;
+/* ── Base Reset ─────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
-  background-color: #0f131a;
-  color: #fff;
+  background-color: var(--dark);
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ── Film grain overlay (Motion-Driven texture) ─────────── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.026;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
 }
 
-h1, h2, h3, h4, h5, h6, p, figure {
-  margin: 0;
+/* ── Animated background orbs ───────────────────────────── */
+@keyframes orb-1 {
+  0%,  100% { transform: translate(0,    0)    scale(1); }
+  33%        { transform: translate(60px, -50px) scale(1.12); }
+  66%        { transform: translate(-30px, 35px) scale(0.90); }
+}
+@keyframes orb-2 {
+  0%,  100% { transform: translate(0,    0)    scale(1); }
+  40%        { transform: translate(-70px,  40px) scale(1.08); }
+  75%        { transform: translate( 40px, -30px) scale(0.94); }
+}
+@keyframes orb-3 {
+  0%,  100% { transform: translate( 0,   0); }
+  50%        { transform: translate(25px, 55px); }
 }
 
+/* ── Text utilities ─────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #c9f31d 0%, #a8d916 60%, #8bbf0f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card hover glow (from UI-UX Pro Max hover rules) ──── */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow: var(--lime-glow);
+  border-color: rgba(201, 243, 29, 0.22) !important;
+  transform: translateY(-2px);
+}
+
+/* ── Magnetic button effect ─────────────────────────────── */
+.btn-lime {
+  background: var(--lime);
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 9999px;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.btn-lime:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(201, 243, 29, 0.3);
+}
+
+/* ── Glass panel (backdrop blur) ────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Marquee animations (Motion-Driven) ─────────────────── */
+@keyframes marquee         { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+@keyframes marquee-reverse { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+
+.animate-marquee         { animation: marquee         35s linear infinite; }
+.animate-marquee-reverse { animation: marquee-reverse 30s linear infinite; }
+.animate-marquee-slow    { animation: marquee         55s linear infinite; }
+.animate-marquee:hover,
+.animate-marquee-reverse:hover { animation-play-state: paused; }
+
+/* ── Entrance animation ─────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.fade-up { animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* ── Glow pulse (status badge) ──────────────────────────── */
+@keyframes glow-pulse {
+  0%,  100% { opacity: 0.55; }
+  50%        { opacity: 1; }
 }
 
-.fade-up {
-  animation: fadeUp 0.6s ease forwards;
+/* ── Number line shine animation ────────────────────────── */
+@keyframes line-grow {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* ── Border gradient helper ─────────────────────────────── */
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(201,243,29,0.3),
+    rgba(255,255,255,0.05),
+    rgba(201,243,29,0.1)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
+/* ── Section divider line ───────────────────────────────── */
+.section-line {
+  width: 40px;
+  height: 2px;
+  background: var(--lime);
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+/* ── Responsive display type scale (Archivo, 700–900) ───── */
+.display-xl  { font-size: clamp(3rem,   8.5vw, 7.5rem); line-height: 0.92; letter-spacing: -0.025em; }
+.display-lg  { font-size: clamp(2.5rem, 6vw,   5.5rem); line-height: 0.94; letter-spacing: -0.02em;  }
+.display-md  { font-size: clamp(2rem,   4.5vw, 4rem);   line-height: 0.98; letter-spacing: -0.015em; }
+.display-sm  { font-size: clamp(1.5rem, 3vw,   2.5rem); line-height: 1.05; letter-spacing: -0.01em;  }
+
+/* ── Service list row ───────────────────────────────────── */
+.service-row {
+  border-top: 1px solid var(--border);
+  transition: background 0.3s ease;
+}
+.service-row:last-child { border-bottom: 1px solid var(--border); }
+.service-row:hover { background: rgba(201,243,29,0.025); }
+
+/* ── Project card image zoom ────────────────────────────── */
+.project-img { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.project-img:hover { transform: scale(1.04); }
+
+/* ── Tag chip ───────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Testimonial quote mark ─────────────────────────────── */
+.quote-mark {
+  font-size: 3.5rem;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--lime);
+  opacity: 0.5;
+  font-family: Georgia, serif;
+}
+
+/* ── Sphere rings (U1CORE-style centered hero) ──────────── */
+@keyframes ring-pulse-1 {
+  0%,  100% { transform: scale(1.55); opacity: 0.18; }
+  50%        { transform: scale(1.62); opacity: 0.28; }
+}
+@keyframes ring-pulse-2 {
+  0%,  100% { transform: scale(2.10); opacity: 0.09; }
+  50%        { transform: scale(2.22); opacity: 0.15; }
+}
+@keyframes ring-pulse-3 {
+  0%,  100% { transform: scale(2.80); opacity: 0.045; }
+  50%        { transform: scale(2.95); opacity: 0.08; }
+}
+@keyframes ring-rotate {
+  from { transform: scale(1.55) rotate(0deg); }
+  to   { transform: scale(1.55) rotate(360deg); }
+}
+
+.ring-1 {
+  position: absolute; inset: 0; border-radius: 9999px;
+  border: 1px solid rgba(201, 243, 29, 0.22);
+  animation: ring-pulse-1 4s ease-in-out infinite;
+}
+.ring-2 {
+  position: absolute; inset: 0; border-radius: 9999px;
+  border: 1px solid rgba(201, 243, 29, 0.10);
+  animation: ring-pulse-2 5s ease-in-out infinite 0.8s;
+}
+.ring-3 {
+  position: absolute; inset: 0; border-radius: 9999px;
+  border: 1px solid rgba(201, 243, 29, 0.05);
+  animation: ring-pulse-3 6s ease-in-out infinite 1.6s;
+}
+
+/* ── Pill CTA border button ─────────────────────────────── */
+.btn-pill-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  border: 1px solid rgba(201, 243, 29, 0.55);
+  color: #c9f31d;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.btn-pill-outline:hover {
+  background: #c9f31d;
+  border-color: #c9f31d;
+  color: #000;
+  transform: scale(1.03);
 }
