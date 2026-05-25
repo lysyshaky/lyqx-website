@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["framer-motion", "motion"],
     optimizeCss: true,
   },
+  compiler: {
+    removeConsole: { exclude: ["error"] },
+  },
+  turbopack: {},
   async headers() {
     return [
       {
