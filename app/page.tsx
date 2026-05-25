@@ -302,6 +302,11 @@ export default function HomePage() {
                 src={logo.src}
                 alt=""
                 role="presentation"
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                width={120}
+                height={28}
                 className="h-7 w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
                 style={
                   logo.invert
@@ -776,6 +781,9 @@ export default function HomePage() {
                         className="opacity-60 hover:opacity-100 transition-opacity duration-300"
                         style={{ height: 84, width: "auto", objectFit: "contain" }}
                         loading="lazy"
+                        decoding="async"
+                        width={120}
+                        height={84}
                       />
                     </a>
                   ))}
@@ -842,6 +850,9 @@ export default function HomePage() {
                       className="w-10 h-10 rounded-full object-cover shrink-0"
                       style={{ border: "2px solid rgba(201,243,29,0.25)" }}
                       loading="lazy"
+                      decoding="async"
+                      width={40}
+                      height={40}
                     />
                     <div>
                       <p className="text-sm font-bold">{t.name}</p>
@@ -938,7 +949,7 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="glass flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-base hover:border-white/30 transition-colors"
               >
-                Find Us on LinkedInW
+                Find Us on LinkedIn
               </a>с
             </div>
           </AnimateIn>
