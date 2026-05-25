@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 interface ProjectDetailProps {
@@ -29,8 +31,17 @@ export default function ProjectDetail({
       {/* HERO */}
       <section className="pt-28 pb-0 px-6 md:px-12 lg:px-16">
         <div className="max-w-[1280px] mx-auto">
-          <Link href="/project" className="text-xs text-white/40 hover:text-white transition-colors mb-8 inline-flex items-center gap-2">
-            ← All Projects
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-10 transition-all duration-200"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)")}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            All Projects
           </Link>
           <div className="mt-6 grid lg:grid-cols-2 gap-12 items-start">
             <div>

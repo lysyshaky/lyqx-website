@@ -1,0 +1,21 @@
+<svg viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Heart icon (scaled to ~38px tall, left side) -->
+  <!-- Left outer arc -->
+  <path d="M 19 13 C 15 4, 2 5, 3 17 C 4 24, 10 28, 16 32"
+        stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- Right outer arc -->
+  <path d="M 19 13 C 23 4, 36 5, 35 17 C 34 24, 28 28, 22 32"
+        stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- Bottom V -->
+  <path d="M 16 32 L 19 37 L 22 32"
+        stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Inner pin circle -->
+  <circle cx="19" cy="17" r="3.8" stroke="white" stroke-width="1.8" fill="none"/>
+  <!-- Inner pin tail -->
+  <path d="M 16.5 20 Q 16 24, 19 27 Q 22 24, 21.5 20"
+        stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Love Nest text -->
+  <text x="48" y="28" fill="white"
+        font-family="Georgia, Palatino, 'Times New Roman', serif"
+        font-style="italic" font-size="20" font-weight="400" letter-spacing="0.3">Love Nest</text>
+</svg>

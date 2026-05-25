@@ -60,6 +60,18 @@ h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 
+.project-card-hover { box-shadow: 0 0 0 0 rgba(201,243,29,0); transition: box-shadow 0.3s ease, transform 0.3s ease; }
+.project-card-hover:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,243,29,0.12); transform: translateY(-4px); }
+
+.process-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.process-card:hover { border-color: rgba(201,243,29,0.25) !important; box-shadow: 0 0 0 1px rgba(201,243,29,0.08), inset 0 0 40px rgba(201,243,29,0.04); }
+.process-card .process-glow { opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(ellipse 90% 70% at 50% 0%, rgba(201,243,29,0.14) 0%, transparent 70%); }
+.process-card:hover .process-glow { opacity: 1; }
+.process-card .process-accent { transition: opacity 0.3s ease; opacity: 0.3; }
+.process-card:hover .process-accent { opacity: 1; background: linear-gradient(to bottom, #c9f31d, rgba(201,243,29,0.3)) !important; }
+.process-card .process-num { color: rgba(255,255,255,0.08); transition: color 0.3s ease; }
+.process-card:hover .process-num { color: #c9f31d; }
+
 /* ── Film grain overlay (Motion-Driven texture) ─────────── */
 .grain-overlay {
   position: fixed;
@@ -87,6 +99,19 @@ h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
   0%,  100% { transform: translate( 0,   0); }
   50%        { transform: translate(25px, 55px); }
 }
+
+@keyframes about-wind {
+  0%   { transform: translateX(0);    opacity: 0; }
+  6%   { opacity: 1; }
+  94%  { opacity: 1; }
+  100% { transform: translateX(420%); opacity: 0; }
+}
+
+@keyframes map-ring {
+  0%   { r: 3.5; opacity: 0.8; }
+  100% { r: 18;  opacity: 0; }
+}
+
 
 /* ── Text utilities ─────────────────────────────────────── */
 .text-gradient {
@@ -191,9 +216,115 @@ h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
 
 /* ── Responsive display type scale (Archivo, 700–900) ───── */
 .display-xl  { font-size: clamp(3rem,   8.5vw, 7.5rem); line-height: 0.92; letter-spacing: -0.025em; }
-.display-lg  { font-size: clamp(2.5rem, 6vw,   5.5rem); line-height: 0.94; letter-spacing: -0.02em;  }
-.display-md  { font-size: clamp(2rem,   4.5vw, 4rem);   line-height: 0.98; letter-spacing: -0.015em; }
-.display-sm  { font-size: clamp(1.5rem, 3vw,   2.5rem); line-height: 1.05; letter-spacing: -0.01em;  }
+.display-lg  { font-size: clamp(2.5rem, 6vw,   5.5rem); line-height: 1.05; letter-spacing: -0.02em;  }
+.display-md  { font-size: clamp(2rem,   4.5vw, 4rem);   line-height: 1.12; letter-spacing: -0.015em; }
+.display-sm  { font-size: clamp(1.5rem, 3vw,   2.5rem); line-height: 1.15; letter-spacing: -0.01em;  }
+
+/* ── Service expertise card (Tallium-style) ─────────────── */
+.svc-card {
+  position: relative;
+  background: #0E1118;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+  padding: 32px;
+  cursor: pointer;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+/* Always-on soft glow — unique position per card via CSS vars */
+.svc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 20%), rgba(201,243,29,0.13) 0%, transparent 58%);
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.svc-card:hover::before { opacity: 1; }
+.svc-card:hover {
+  border-color: rgba(201, 243, 29, 0.30);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.55);
+}
+
+/* Icon wrapper */
+.svc-icon-wrap {
+  position: relative;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  margin-bottom: 28px;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+.svc-card:hover .svc-icon-wrap { background: rgba(201, 243, 29, 0.10); }
+
+/* White icon → fades out on hover */
+.svc-icon-default {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255, 255, 255, 0.48);
+  transition: opacity 0.25s ease;
+}
+.svc-card:hover .svc-icon-default { opacity: 0; }
+
+/* Lime icon → crossfades in on hover */
+.svc-icon-active {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #c9f31d;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.svc-card:hover .svc-icon-active { opacity: 1; }
+
+/* Title */
+.svc-card-title {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.25;
+  transition: color 0.3s ease;
+}
+.svc-card:hover .svc-card-title { color: #c9f31d; }
+
+/* Arrow — slides in from left on hover */
+.svc-card-arrow {
+  color: #c9f31d;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+.svc-card:hover .svc-card-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── Industry card ──────────────────────────────────────── */
+.ind-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  overflow: hidden;
+  transition: background 0.4s ease, border-color 0.4s ease, transform 0.35s ease, box-shadow 0.4s ease;
+}
+.ind-card:hover {
+  background: radial-gradient(ellipse 100% 60% at 50% -10%, rgba(201,243,29,0.55) 0%, rgba(201,243,29,0.18) 50%, rgba(255,255,255,0.06) 75%);
+  border-color: rgba(201, 243, 29, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 0 72px rgba(201, 243, 29, 0.22), 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+.ind-card:hover .ind-img {
+  transform: scale(1.07) translateY(-6px);
+}
+.ind-img {
+  display: block;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 /* ── Service list row ───────────────────────────────────── */
 .service-row {
@@ -248,6 +379,15 @@ h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
 @keyframes ring-rotate {
   from { transform: scale(1.55) rotate(0deg); }
   to   { transform: scale(1.55) rotate(360deg); }
+}
+
+@keyframes footer-lyqx-in {
+  0%   { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.footer-lyqx-wrap:hover .footer-lyqx-letter {
+  background-image: linear-gradient(to bottom, rgba(201,243,29,0.5) 0%, #c9f31d 100%) !important;
 }
 
 .ring-1 {

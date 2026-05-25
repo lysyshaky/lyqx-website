@@ -22,7 +22,7 @@ function sOpacity(i: number): number[] {
 /* ── floating cards ──────────────────────────────────────── */
 const cards = [
   { id: "revenue", label: "$5M+", sub: "Revenue generated", color: "#c9f31d", style: { top: "6%", left: "-18%" }, delay: 0, float: { y: [-6, 6], dur: 3.2 } },
-  { id: "retention", label: "+68%", sub: "User Retention", color: "#c9f31d", style: { top: "8%", right: "-16%" }, delay: 0.4, float: { y: [5, -5], dur: 2.8 } },
+  { id: "retention", label: "+68%", sub: "User Retention", color: "#4e9eff", style: { top: "8%", right: "-16%" }, delay: 0.4, float: { y: [5, -5], dur: 2.8 } },
   { id: "platforms", label: "iOS & Android", sub: "Both platforms", color: "#a78bfa", style: { top: "46%", right: "-20%" }, delay: 0.8, float: { y: [-8, 4], dur: 3.6 } },
   { id: "growth", label: "10k Users", sub: "Shipped in 60 days", color: "#34d399", style: { bottom: "17%", left: "-14%" }, delay: 0.6, float: { y: [4, -8], dur: 3.0 } },
   { id: "rating", label: "5.0 ★", sub: "Avg. App Store rating", color: "#f6863a", style: { bottom: "9%", right: "-18%" }, delay: 1.0, float: { y: [-4, 7], dur: 3.4 } },

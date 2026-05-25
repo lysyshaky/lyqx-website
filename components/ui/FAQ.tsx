@@ -22,14 +22,14 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
     <div className="flex flex-col gap-3">
       {faqs.map((item, i) => (
         <div key={i} className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
           <button
-            className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
+            className="w-full flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 text-left gap-3"
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
           >
@@ -51,7 +51,7 @@ export default function FAQ() {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="px-6 pb-5 text-sm text-white/50 leading-relaxed">
+                <p className="px-4 sm:px-6 pb-4 sm:pb-5 text-sm text-white/50 leading-relaxed">
                   {item.a}
                 </p>
               </motion.div>

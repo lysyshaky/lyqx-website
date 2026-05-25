@@ -20,7 +20,8 @@ export default function Counter({ to, suffix = "", duration = 1.8, className }: 
     let step = 0;
     const timer = setInterval(() => {
       step++;
-      setCount(Math.round((step / steps) * to));
+      const raw = (step / steps) * to;
+      setCount(Number.isInteger(to) ? Math.round(raw) : Math.round(raw * 10) / 10);
       if (step >= steps) clearInterval(timer);
     }, (duration * 1000) / steps);
     return () => clearInterval(timer);

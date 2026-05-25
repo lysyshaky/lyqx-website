@@ -1,0 +1,9 @@
+<svg viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- N icon — rounded square with N cutout -->
+  <rect x="1" y="1" width="38" height="38" rx="8" fill="white"/>
+  <polygon points="9,30 9,10 15,10 25,24 25,10 31,10 31,30 25,30 15,16 15,30" fill="#0b0f1a"/>
+  <!-- NEAR text -->
+  <text x="52" y="28" fill="white"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
+        font-size="22" font-weight="700" letter-spacing="-0.5">NEAR</text>
+</svg>

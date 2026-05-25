@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 155" width="130" height="155">
+  <!-- Shield shape -->
+  <path d="M65 4 L126 34 L126 104 L65 151 L4 104 L4 34 Z" fill="#111111" stroke="rgba(255,255,255,0.12)" stroke-width="1.2"/>
+  <!-- Top label -->
+  <text x="65" y="26" font-family="Arial,sans-serif" font-size="6.5" fill="rgba(255,255,255,0.5)" text-anchor="middle" letter-spacing="1.2" font-weight="600">TOP APP DEVELOPMENT</text>
+  <text x="65" y="36" font-family="Arial,sans-serif" font-size="6.5" fill="rgba(255,255,255,0.5)" text-anchor="middle" letter-spacing="1.2" font-weight="600">COMPANY</text>
+  <!-- Dribbble ball -->
+  <circle cx="65" cy="82" r="26" fill="#ea4c89"/>
+  <path d="M39 82 Q52 68 65 82 Q78 96 91 82" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M65 56 Q78 70 78 88 Q78 106 65 108" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Divider -->
+  <line x1="30" y1="118" x2="100" y2="118" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+  <!-- SELECT text -->
+  <text x="65" y="135" font-family="Arial,sans-serif" font-size="11" fill="white" text-anchor="middle" letter-spacing="3" font-weight="700">SELECT</text>
+</svg>
