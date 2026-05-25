@@ -8,8 +8,9 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "900"],
   display: "swap",
+  preload: true,
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -22,11 +23,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://lyqx.agency"),
   title: {
-    default: "LYQX — Mobile Design & Development Agency",
+    default: "LYQX — Mobile Design & Development Solutions",
     template: "%s | LYQX",
   },
   description:
-    "LYQX is a full-cycle digital agency specializing in mobile app development, web platforms, UX/UI design, and AI integration. We build B2B and B2C products that drive real business growth.",
+    "LYQX is a full-cycle digital solutions company specializing in mobile app development, web platforms, UX/UI design, and AI integration. We build B2B and B2C products that drive real business growth.",
   openGraph: {
     type: "website",
     siteName: "LYQX",
@@ -51,6 +52,12 @@ export default function RootLayout({
       lang="en"
       className={`${archivo.variable} ${spaceGrotesk.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://framerusercontent.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://randomuser.me" />
+        <link rel="dns-prefetch" href="https://shopsocietyapp.com" />
+      </head>
       <body
         className="min-h-screen flex flex-col"
         style={{ fontFamily: "var(--font-space-grotesk), system-ui, sans-serif" }}

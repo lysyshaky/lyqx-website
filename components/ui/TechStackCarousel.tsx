@@ -57,7 +57,7 @@ export default function TechStackCarousel() {
             />
             <span
               className="text-[10px] font-semibold uppercase tracking-widest"
-              style={{ color: "rgba(255,255,255,0.28)" }}
+              style={{ color: "rgba(255,255,255,0.58)" }}
             >
               {tech.name}
             </span>

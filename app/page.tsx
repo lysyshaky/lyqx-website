@@ -1,15 +1,20 @@
 import AnimateIn from "@/components/ui/AnimateIn";
-import Counter from "@/components/ui/Counter";
-import FAQ from "@/components/ui/FAQ";
-import GlobalMap from "@/components/ui/GlobalMap";
-import PhoneAnimation from "@/components/ui/PhoneAnimation";
 import ProjectCard from "@/components/ui/ProjectCard";
-import TechStackCarousel from "@/components/ui/TechStackCarousel";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
+// All heavy components deferred — framer-motion loads after initial paint
+const PhoneAnimation = dynamic(() => import("@/components/ui/PhoneAnimation"), {
+  loading: () => <div className="w-full max-w-[390px]" style={{ aspectRatio: "390/780" }} />,
+});
+const Counter = dynamic(() => import("@/components/ui/Counter"));
+const TechStackCarousel = dynamic(() => import("@/components/ui/TechStackCarousel"));
+const GlobalMap = dynamic(() => import("@/components/ui/GlobalMap"));
+const FAQ = dynamic(() => import("@/components/ui/FAQ"));
+
 export const metadata: Metadata = {
-  title: "LYQX — Mobile Design & Development Agency",
+  title: "LYQX — Mobile Design & Development Solutions",
   description:
     "LYQX is a full-cycle digital agency specializing in mobile app development, web platforms, UX/UI design, and AI integration. 7+ years, 60+ products shipped.",
   openGraph: { url: "https://lyqx.agency/" },

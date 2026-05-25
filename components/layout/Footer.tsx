@@ -136,10 +136,15 @@ function getTimeAndOffset(tz: string) {
   return { time, offset: offsetRaw.replace("GMT", "UTC") };
 }
 
+type ClockEntry = { time: string; offset: string };
+
 function LiveClocks() {
-  const [tick, setTick] = useState(0);
+  const [clocks, setClocks] = useState<ClockEntry[]>([]);
+
   useEffect(() => {
-    const id = setInterval(() => setTick((t) => t + 1), 30_000);
+    const update = () => setClocks(locations.map((loc) => getTimeAndOffset(loc.tz)));
+    update();
+    const id = setInterval(update, 30_000);
     return () => clearInterval(id);
   }, []);
 
@@ -160,13 +165,13 @@ function LiveClocks() {
           className="w-1.5 h-1.5 rounded-full shrink-0"
           style={{ background: "#c9f31d", boxShadow: "0 0 6px rgba(201,243,29,0.9)", animation: "glow-pulse 2.5s ease-in-out infinite" }}
         />
-        <span className="text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+        <span className="text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: "rgba(255,255,255,0.55)" }}>
           Available Worldwide
         </span>
       </div>
 
       {locations.map((loc, i) => {
-        const { time, offset } = getTimeAndOffset(loc.tz);
+        const entry = clocks[i];
         return (
           <div
             key={loc.tz}
@@ -179,9 +184,12 @@ function LiveClocks() {
             <span className="text-[12px] flex-1 font-medium" style={{ color: "rgba(255,255,255,0.58)" }}>
               {loc.city}
             </span>
-            <span className="text-[11px] font-mono tabular-nums shrink-0" style={{ color: "rgba(255,255,255,0.3)" }}>
-              {time}{" "}
-              <span style={{ color: "rgba(201,243,29,0.5)" }}>({offset})</span>
+            <span className="text-[11px] font-mono tabular-nums shrink-0" style={{ color: "rgba(255,255,255,0.55)" }}>
+              {entry ? (
+                <>{entry.time} <span style={{ color: "rgba(201,243,29,0.8)" }}>({entry.offset})</span></>
+              ) : (
+                <span style={{ color: "rgba(255,255,255,0.2)" }}>--:--</span>
+              )}
             </span>
           </div>
         );
@@ -190,7 +198,7 @@ function LiveClocks() {
   );
 }
 
-const navLink = "text-[13px] transition-colors duration-200 text-white/45 hover:text-white";
+const navLink = "text-[13px] transition-colors duration-200 text-white/60 hover:text-white";
 
 export default function Footer() {
   return (
@@ -207,7 +215,6 @@ export default function Footer() {
           <span className="text-[21px] font-black tracking-[0.20em] text-white uppercase transition-colors duration-200 group-hover:text-[#c9f31d]" style={{ fontFamily: "var(--font-archivo)" }}>
             LYQX
           </span>
-          <span className="text-[9px] font-medium tracking-[0.36em] uppercase text-white/35">SOLUTIONS</span>
         </Link>
 
         <div className="flex items-center gap-0.5">
@@ -238,7 +245,7 @@ export default function Footer() {
           {/* Nav columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
             <div>
-              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-archivo)" }}>
+              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-archivo)" }}>
                 Services
               </h3>
               <ul className="space-y-2.5">
@@ -251,7 +258,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-archivo)" }}>
+              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-archivo)" }}>
                 Industries
               </h3>
               <ul className="space-y-2.5">
@@ -264,7 +271,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-archivo)" }}>
+              <h3 className="text-[9px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-archivo)" }}>
                 Company
               </h3>
               <ul className="space-y-2.5">
@@ -283,7 +290,7 @@ export default function Footer() {
             style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.025)" }}
           >
             <div className="flex-1">
-              <p className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: "rgba(255,255,255,0.25)" }}>
+              <p className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: "rgba(255,255,255,0.55)" }}>
                 Get in touch
               </p>
               <a
@@ -367,7 +374,7 @@ export default function Footer() {
               <Link
                 href={item.href}
                 className="text-[12px] px-2 transition-colors duration-200 hover:text-white"
-                style={{ color: "rgba(255,255,255,0.35)" }}
+                style={{ color: "rgba(255,255,255,0.55)" }}
               >
                 {item.label}
               </Link>
